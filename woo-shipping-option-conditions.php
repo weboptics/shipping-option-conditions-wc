@@ -13,22 +13,27 @@
  * @param array $rates Array of rates found for the package.
  * @return array
  */
-function my_hide_shipping_when_free_is_available( $rates ) {
-	$free = array();
+function hide_shipping_when_free_is_available( $rates ) {
+	$new_rates = array();
 	foreach ( $rates as $rate_id => $rate ) {
-		$shipping_data = get_option('woocommerce_free_shipping_'.$rate->instance_id.'_settings');
+		$shipping_data = get_option('woocommerce_'.$rate->method_id.'_'.$rate->instance_id.'_settings');
 		$woo_show_hide=(isset($shipping_data['woo_show_hide'])) ? $shipping_data['woo_show_hide'] : 'no';
+		$woo_show_hide_override=(isset($shipping_data['woo_show_hide_override'])) ? $shipping_data['woo_show_hide_override'] : 'no';
 		if ( 'free_shipping' === $rate->method_id && 'yes' === $woo_show_hide ) {
-			$free[ $rate_id ] = $rate;
-			// break;
+			$new_rates[ $rate_id ] = $rate;
+		}elseif('yes' == $woo_show_hide_override){
+			$new_rates[ $rate_id ] = $rate;
 		}
 	}
-	return ! empty( $free ) ? $free : $rates;
+	
+	return ! empty( $new_rates ) ? $new_rates : $rates;
 }
-add_filter( 'woocommerce_package_rates', 'my_hide_shipping_when_free_is_available', 100 );
+add_filter( 'woocommerce_package_rates', 'hide_shipping_when_free_is_available', 100 );
 
 
-function shipping_instance_form_add_extra_fields($settings)
+
+
+function shipping_instance_form_add_extra_fields_free($settings)
 {
     $settings['woo_show_hide'] = [
         'title' => 'Show / Hide',
@@ -41,15 +46,34 @@ function shipping_instance_form_add_extra_fields($settings)
 
     return $settings;
 }
+function shipping_instance_form_add_extra_fields_others($settings)
+{
+    $settings['woo_show_hide_override'] = [
+        'title' => 'Show / Hide - Override',
+		'default' => 'Show / Hide - Override',
+        'type' => 'checkbox',
+        'label' => 'If checked, this shipping method will show even if Its hidden by free shipping.',
+		'description' => 'If checked, this shipping method will show even if Its hidden by free shipping.',
+		'desc_tip'    => true,
+    ];
+
+    return $settings;
+}
 
 function shipping_instance_form_fields_filters()
 {	
+	// Retrieve shipping zones
+	$shipping_zones = WC_Shipping_Zones::get_zones();
     $shipping_methods = WC()->shipping->get_shipping_methods();
+	
     foreach ($shipping_methods as $shipping_method) {
+		// var_dump($shipping_method);
 		if('free_shipping'===$shipping_method->id){
-			add_filter('woocommerce_shipping_instance_form_fields_' . $shipping_method->id, 'shipping_instance_form_add_extra_fields');
+			add_filter('woocommerce_shipping_instance_form_fields_' . $shipping_method->id, 'shipping_instance_form_add_extra_fields_free');
+		}else{
+			add_filter('woocommerce_shipping_instance_form_fields_' . $shipping_method->id, 'shipping_instance_form_add_extra_fields_others');
 		}
-    }
+	}
 }
 
 add_action('woocommerce_init', 'shipping_instance_form_fields_filters');

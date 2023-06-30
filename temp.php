@@ -50,3 +50,21 @@ function enqueue_admin_js(){
 	);
 }
 add_action( 'admin_footer', 'enqueue_admin_js'); // Priority needs to be higher than wc_print_js (25).
+
+
+// $zones = WC_Shipping_Zones::get_zones();
+// $methods = array_map(function($zone) {
+// 	return $zone['shipping_methods'];
+// }, $zones);
+// foreach ($methods as $method) {
+// 	foreach ($method as $value) {
+// 		# code...
+// 		$nstance_id=$value->get_instance_id();
+// 		$rate_id=$value->get_rate_id();
+// 		$rate_arr=explode(':',$value->get_rate_id());
+// 		$rate_id=$rate_arr[0];
+// 		var_dump($rate_id);
+// 	}
+// }
+// $custom_shipping_data = get_option('woocommerce_free_shipping_5_settings');
+// 	var_dump($custom_shipping_data['woo_show_hide']);
