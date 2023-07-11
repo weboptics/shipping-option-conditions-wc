@@ -1,9 +1,26 @@
 <?php
 /**
  * Plugin Name: WooCommerce Shipping Option Conditions
- * 
+ * Plugin URI:        https://github.com/webzombies/woo-shipping-option-conditions
+ * Description:       Handle the basics with this plugin.
+ * Version:           1.10.3
+ * Requires at least: 5.2
+ * Requires PHP:      7.2
+ * Author:            Haseeb Nawaz Awan
+ * Author URI:        https://github.com/haseebnawaz298
+ * License:           GPL v2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       woo-shipping-option-conditions
  */
 
+//disallow direct access,
+if (!defined('WPINC')) {
+    die;
+}
+
+// exit if accessed directly
+if (! defined('ABSPATH') ) { exit;
+}
 
 
 /**
