@@ -1,7 +1,7 @@
 <?php
 /**
- * Plugin Name: WooCommerce Shipping Option Conditions
- * Plugin URI:        https://github.com/webzombies/woo-shipping-option-conditions
+ * Plugin Name:       WC Shipping Option Conditions
+ * Plugin URI:        https://github.com/webzombies/wc-shipping-option-conditions 
  * Description:       Handle the basics shipping condition with this plugin
  * Version:           1.10.3
  * Requires at least: 5.2
@@ -10,7 +10,7 @@
  * Author URI:        https://github.com/haseebnawaz298
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       woo-shipping-option-conditions
+ * Text Domain:       wc-shipping-option-conditions 
  */
 
 //disallow direct access,
