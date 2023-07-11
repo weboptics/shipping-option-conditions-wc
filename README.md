@@ -1,1 +1,1 @@
-# woocommerce-shipping-option-conditions
+# wc-shipping-option-conditions 
