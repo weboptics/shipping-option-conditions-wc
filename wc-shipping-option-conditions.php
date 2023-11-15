@@ -3,8 +3,8 @@
  * Plugin Name:       WC Shipping Option Conditions
  * Plugin URI:        https://github.com/webzombies/wc-shipping-option-conditions 
  * Description:       Handle the basics shipping condition with this plugin
- * Version:           1.10.3
- * Requires at least: 5.2
+ * Version:           1.0.0
+ * Requires at least: 5.8
  * Requires PHP:      7.2
  * Author:            Haseeb Nawaz Awan
  * Author URI:        https://github.com/haseebnawaz298
@@ -19,7 +19,8 @@ if (!defined('WPINC')) {
 }
 
 // exit if accessed directly
-if (! defined('ABSPATH') ) { exit;
+if (! defined('ABSPATH') ) { 
+	exit;
 }
 
 
@@ -30,7 +31,7 @@ if (! defined('ABSPATH') ) { exit;
  * @param array $rates Array of rates found for the package.
  * @return array
  */
-function hide_shipping_when_free_is_available( $rates ) {
+function hs_wcsh_hide_shipping_when_free_is_available( $rates ) {
 	$new_rates = array();
 	foreach ( $rates as $rate_id => $rate ) {
 		$shipping_data = get_option('woocommerce_'.$rate->method_id.'_'.$rate->instance_id.'_settings');
@@ -45,12 +46,12 @@ function hide_shipping_when_free_is_available( $rates ) {
 	
 	return ! empty( $new_rates ) ? $new_rates : $rates;
 }
-add_filter( 'woocommerce_package_rates', 'hide_shipping_when_free_is_available', 100 );
+add_filter( 'woocommerce_package_rates', 'hs_wcsh_hide_shipping_when_free_is_available', 100 );
 
 
 
 
-function shipping_instance_form_add_extra_fields_free($settings)
+function hs_wcsh_shipping_instance_form_add_extra_fields_free($settings)
 {
     $settings['woo_show_hide'] = [
         'title' => 'Show / Hide',
@@ -63,7 +64,7 @@ function shipping_instance_form_add_extra_fields_free($settings)
 
     return $settings;
 }
-function shipping_instance_form_add_extra_fields_others($settings)
+function hs_wcsh_shipping_instance_form_add_extra_fields_others($settings)
 {
     $settings['woo_show_hide_override'] = [
         'title' => 'Show / Hide - Override',
@@ -77,7 +78,7 @@ function shipping_instance_form_add_extra_fields_others($settings)
     return $settings;
 }
 
-function shipping_instance_form_fields_filters()
+function hs_wcsh_shipping_instance_form_fields_filters()
 {	
 	// Retrieve shipping zones
 	$shipping_zones = WC_Shipping_Zones::get_zones();
@@ -86,11 +87,11 @@ function shipping_instance_form_fields_filters()
     foreach ($shipping_methods as $shipping_method) {
 		// var_dump($shipping_method);
 		if('free_shipping'===$shipping_method->id){
-			add_filter('woocommerce_shipping_instance_form_fields_' . $shipping_method->id, 'shipping_instance_form_add_extra_fields_free');
+			add_filter('woocommerce_shipping_instance_form_fields_' . $shipping_method->id, 'hs_wcsh_shipping_instance_form_add_extra_fields_free');
 		}else{
-			add_filter('woocommerce_shipping_instance_form_fields_' . $shipping_method->id, 'shipping_instance_form_add_extra_fields_others');
+			add_filter('woocommerce_shipping_instance_form_fields_' . $shipping_method->id, 'hs_wcsh_shipping_instance_form_add_extra_fields_others');
 		}
 	}
 }
 
-add_action('woocommerce_init', 'shipping_instance_form_fields_filters');
+add_action('woocommerce_init', 'hs_wcsh_shipping_instance_form_fields_filters');
