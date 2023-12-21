@@ -1,4 +1,4 @@
-=== WC Shipping Option Conditions ===
+=== Shipping Option Conditions for WooCommerce ===
 
 Contributors: haseebnawaz298
 Tags: woocommerce, free shipping, local pickup, hide, hide shipping methods, hide shipping rates, force free shipping, hide other shipping methods, when free shipping, disable other shipping, keep local pickup
