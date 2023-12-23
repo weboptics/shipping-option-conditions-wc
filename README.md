@@ -56,4 +56,5 @@ Submit a issue <a href="https://github.com/webzombies/shipping-option-conditions
 * Added Frequently Asked Questions.
 * Added Screenshots.
 * Added Changelog.
-* Added Banner and Icon
+* Added Banner and Icon.
+* Added Plugin URI.

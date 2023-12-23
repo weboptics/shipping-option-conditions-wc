@@ -8,6 +8,7 @@
  * Requires PHP:      7.2
  * Author:            Haseeb Nawaz Awan
  * Author URI:        https://github.com/haseebnawaz298
+ * Plugin URI:        https://github.com/webzombies/shipping-option-conditions-wc
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       shipping-option-conditions-wc 
