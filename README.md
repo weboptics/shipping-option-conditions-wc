@@ -4,7 +4,7 @@ Contributors: haseebnawaz298
 Tags: woocommerce, free shipping, local pickup, hide, hide shipping methods, hide shipping rates, force free shipping, hide other shipping methods, when free shipping, disable other shipping, keep local pickup
 Requires at least: 4.5.0
 Tested up to: 6.3
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 WC requires at least: 3
 WC tested up to: 5.6.0
 License: GPLv3 or later License
@@ -15,8 +15,27 @@ This plugin automatically hides all other shipping methods when “free shipping
 
 == Description ==
 
-Handle the basics shipping condition with this plugin
+Simplify your online store's shipping choices with the Easy Ship Options plugin for WordPress. This tool lets you effortlessly manage how shipping methods are displayed, providing a seamless shopping experience for your customers.
 
+= Features =
+
+* Lets you Hide all shipping options when free shipping is available.
+* Gives you the option to force show other shipping option when above feature is enabled.
+* Compatible with multiple shipping zones.
+
+== Frequently Asked Questions ==
+
+= I need help to configure the plugin? =
+
+Please email me at <a href="mailto:haseebnawaz298@gmail.com" target="_blank">haseebnawaz298@gmail.com</a>
+
+= For support or troubleshooting help =
+
+Submit a issue <a href="https://github.com/webzombies/shipping-option-conditions-wc/issues">here</a>.
+
+== Screenshots ==
+1. If checked, other shipping would be un-available when this is available.
+2. If checked, this shipping method will show even if Its hidden by free shipping.
 
 == Installation ==
 
@@ -25,3 +44,16 @@ Handle the basics shipping condition with this plugin
 3. Navigate to **WooCommerce > Settings > Shipping > Shipping options > Shipping Zone**.
 4. Select your option.
 5. Save and enjoy!
+
+
+== Changelog ==
+
+= 1.0.1 =
+* Release first version
+
+= 1.0.1 =
+* Update plugin description.
+* Added Frequently Asked Questions.
+* Added Screenshots.
+* Added Changelog.
+* Added Banner and Icon
