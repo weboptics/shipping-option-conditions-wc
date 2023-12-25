@@ -3,8 +3,8 @@
 Contributors: haseebnawaz298
 Tags: woocommerce, free shipping, local pickup, hide, hide shipping methods, hide shipping rates, force free shipping, hide other shipping methods, when free shipping, disable other shipping, keep local pickup
 Requires at least: 4.5.0
-Tested up to: 6.3
-Stable tag: 1.0.1
+Tested up to: 6.4.2
+Stable tag: 1.0.2
 WC requires at least: 3
 WC tested up to: 5.6.0
 License: GPLv3 or later License
@@ -48,7 +48,7 @@ Submit a issue <a href="https://github.com/webzombies/shipping-option-conditions
 
 == Changelog ==
 
-= 1.0.1 =
+= 1.0.0 =
 * Release first version
 
 = 1.0.1 =
@@ -58,3 +58,6 @@ Submit a issue <a href="https://github.com/webzombies/shipping-option-conditions
 * Added Changelog.
 * Added Banner and Icon.
 * Added Plugin URI.
+
+= 1.0.2 =
+* Update tested up to version from 6.3 to 6.4.2
