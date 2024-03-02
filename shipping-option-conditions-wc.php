@@ -3,7 +3,7 @@
  * Plugin Name:       Shipping Option Conditions for WooCommerce
  * Plugin URI:        https://github.com/webzombies/shipping-option-conditions-wc 
  * Description:       Handle the basics shipping condition with this plugin
- * Version:           1.0.3
+ * Version:           1.0.4
  * Requires at least: 5.8
  * Requires PHP:      7.2
  * Author:            Haseeb Nawaz Awan
@@ -70,7 +70,7 @@ class HS_WCSH_Init{
 			'title' => 'Show / Hide',
 			'default' => 'Show / Hide',
 			'type' => 'checkbox',
-			'label' => 'If checked, other shipping would be un-available when this is available.',
+			'label' => 'Used to Hide Shipping Method',
 			'description' => 'If checked, other shipping would be un-available when this is available.',
 			'desc_tip'    => true,
 		];
@@ -91,7 +91,7 @@ class HS_WCSH_Init{
 			'title' => 'Show / Hide - Override',
 			'default' => 'Show / Hide - Override',
 			'type' => 'checkbox',
-			'label' => 'If checked, this shipping method will show even if Its hidden by free shipping.',
+			'label' => 'Used Override the Hidden Shipping Method',
 			'description' => 'If checked, this shipping method will show even if Its hidden by free shipping.',
 			'desc_tip'    => true,
 		];
