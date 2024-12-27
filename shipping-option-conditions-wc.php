@@ -41,105 +41,10 @@ class HS_WCSH_Init{
 		if (in_array('woocommerce/woocommerce.php', apply_filters('active_plugins', get_option('active_plugins')))) {
 			add_filter( 'woocommerce_package_rates', array($this,'hide_shipping_when_free_is_available'), 100 );
 			add_action('woocommerce_init',  array($this,'shipping_instance_form_fields_filters'));
-			// Change text box to select and set cities options
-			$data = get_option( 'woocommerce_conditional_shipping_class_settings' );
-			$enable_cities_select = $data['enable_cities_select'] ?? null;
-			if ( 'yes' === $enable_cities_select ){
-				add_filter( 'woocommerce_checkout_fields', array( $this, 'custom_city_options' ) );
-			} 
-			add_filter( 'woocommerce_shipping_init', array($this, 'shipping_method') );
-			add_filter( 'woocommerce_shipping_methods', array($this, 'add_shipping_method') );
-			// add_action('admin_footer', array($this,  'custom_admin_footer_styles'));
-			add_filter( 'wp_footer', array( $this, 'city_wp_footer' ) );
 
 		}
 		add_action('admin_notices',  array($this,'custom_plugin_activation_notice'));
 	}
-
-	function custom_admin_footer_styles() {
-		echo '<style>
-			#woocommerce_conditional_shipping_class_cities{
-				width:100%;
-			}
-		</style>';
-	}
-
-
-	function city_wp_footer(){
-		// var_dump(is_checkout());
-		if(is_checkout()){
-			?>
-			<script>
-				jQuery(document).ready(function(){
-					jQuery('#billing_city').change(function(){
-						jQuery('body').trigger('update_checkout');
-					});
-					jQuery('#shipping_city').change(function(){
-						jQuery('body').trigger('update_checkout');
-					});
-				})
-			</script>
-			<?php
-		}
-	}
-
-
-
-	
-	function shipping_method() {
-		include_once "includes/conditional-shipping-class.php";
-	}
-	function add_shipping_method( $methods ) {
-		$methods['conditional_shipping_class'] = 'Conditional_Shipping_Class';
-		return $methods;
-	}
-	function custom_city_options( $fields ) {
-        // global $wpdb;
-        // $table = $wpdb->prefix . "shiprate_cities";
-        // $cities = $wpdb->get_results("SELECT city_name FROM $table ");
-        // $options = array('Select city');
-        // foreach($cities as $city) {
-        //     $options[$city->city_name] = $city->city_name;
-        // }
-		$data = get_option( 'woocommerce_conditional_shipping_class_settings' );
-		$cities = $data['cities'] ?? null;
-		$options = array();
-
-		// Split the string into lines
-		$lines = explode("\n", $cities);
-
-		foreach ($lines as $line) {
-			// Split each line by the ': ' delimiter
-			list($key, $value) = explode(' : ', $line);
-			// Trim whitespace and add to the array
-			$options[trim($key)] = trim($value);
-		}
-		
-    
-        // Get the current city value
-        $city_value = isset($fields['shipping']['shipping_city']['default']) ? $fields['shipping']['shipping_city']['default'] : '';
-    
-     
-        // Use the default select box
-        $city_args = wp_parse_args(array(
-            'type'    => 'select',
-            'options' => $options,
-            'autocomplete' => true,
-        ), $fields['shipping']['shipping_city']);
-        $city_args_text = array();
-        
-    
-        // Set the shipping and billing city fields
-        $fields['shipping']['shipping_city'] = $city_args;
-        $fields['shipping']['shipping_city_text'] = $city_args_text;
-    
-        $fields['billing']['billing_city'] = $city_args;
-        $fields['billing']['billing_city_text'] = $city_args_text;
-    
-        
-    
-        return $fields;
-    }
 
 	/**
 	 * Hide shipping rates when free shipping is available.
