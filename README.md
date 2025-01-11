@@ -2,8 +2,7 @@
 
 Contributors: weboptics, haseebnawaz298
 Tags: woocommerce, free shipping, local pickup, hide, hide shipping methods
-Requires at least: 4.5.0
-Tested up to: 6.7.1
+Tested up to: 6.7
 Stable tag: 1.0.8
 WC requires at least: 3
 WC tested up to: 5.6.0
@@ -31,7 +30,7 @@ Please email me at <a href="mailto:haseebnawaz298@gmail.com" target="_blank">has
 
 = For support or troubleshooting help =
 
-Submit a issue <a href="https://github.com/webzombies/shipping-option-conditions-wc/issues">here</a>.
+Submit a issue <a href="https://github.com/weboptics/shipping-option-conditions-wc/issues">here</a>.
 
 == Screenshots ==
 1. If checked, other shipping would be un-available when this is available.
@@ -84,3 +83,5 @@ Submit a issue <a href="https://github.com/webzombies/shipping-option-conditions
 = 1.0.8 =
 * Updated author and contributors
 * Updated tested upto
+
+= 1.0.9 =

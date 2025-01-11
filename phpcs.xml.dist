@@ -43,7 +43,7 @@
 	<!-- Check all globals have the expected prefix. -->
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
-			<property name="prefixes" type="array" value="WP_Theme, Wo, wo_, WO_"/>
+			<property name="prefixes" type="array" value="WP_Theme, HS_WCSH, HS_WCSH_, HS_WCSH_"/>
 		</properties>
 	</rule>
 	<!-- Allow theme-specific exceptions to WordPress filename rules. -->
@@ -54,7 +54,7 @@
 	</rule>
 	<rule ref="WordPress.Security.EscapeOutput">
 		<properties>
-			<property name="customAutoEscapedFunctions" type="array" value="Wo,html_entity_decode, html_entity_remove, build_acf_button,build_excerpt,build_excerpt_nomore"/>
+			<property name="customAutoEscapedFunctions" type="array" value="HS_WCSH,html_entity_decode, html_entity_remove, build_acf_button,build_excerpt,build_excerpt_nomore"/>
 		</properties>
 	</rule>
 	<rule ref="WordPress.Security.ValidatedSanitizedInput">
