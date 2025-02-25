@@ -3,7 +3,7 @@
  * Plugin Name:       Shipping Option Conditions for WooCommerce
  * Plugin URI:        https://github.com/weboptics/shipping-option-conditions-wc
  * Description:       Handle the basics shipping condition with this plugin
- * Version:           1.0.9
+ * Version:           1.1.0
  * Requires at least: 5.8
  * Requires PHP:      7.2
  * Author:            WebOptics
