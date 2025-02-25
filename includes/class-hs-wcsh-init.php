@@ -159,10 +159,10 @@ class HS_WCSH_Init {
 	public function plugin_woocommerce_tab() {
 		add_submenu_page(
 			'woocommerce',
-			'Custom Shipping',
-			'Custom Shipping',
+			'Conditional Shipping',
+			'Conditional Shipping',
 			'manage_woocommerce',
-			'custom-shipping-options-tab',
+			'conditional-shipping-options',
 			array( $this, 'plugin_woocommerce_tab_output' )
 		);
 	}
@@ -178,7 +178,7 @@ class HS_WCSH_Init {
 
 		?>
 		<div class="wrap">
-			<h1><?php esc_html_e( 'Custom Shipping', 'shipping-option-conditions-wc' ); ?></h1>
+			<h1><?php esc_html_e( 'Conditional Shipping', 'shipping-option-conditions-wc' ); ?></h1>
 			<p><?php esc_html_e( 'Here you can add prices by shipping states/city.', 'shipping-option-conditions-wc' ); ?></p>
 			<p><strong><?php esc_html_e( 'Any Empty field will be considered free', 'shipping-option-conditions-wc' ); ?></strong></p>
 			<!-- Add your custom content or forms here -->
@@ -190,7 +190,7 @@ class HS_WCSH_Init {
 				<?php } ?>
 			</h2>
 			<form method="post" action="">
-				<?php wp_nonce_field( 'save_custom_shipping_options', 'custom_shipping_options_nonce' ); ?>
+				<?php wp_nonce_field( 'save_conditional_shipping_options', 'conditional_shipping_options_nonce' ); ?>
 
 				<div class="tab-content">
 					<?php
@@ -217,9 +217,10 @@ class HS_WCSH_Init {
 	 */
 	public function save_plugin_woocommerce_tab_data() {
 		if (
-			! isset( $_POST['custom_shipping_options_nonce'] ) ||
-			! wp_verify_nonce( $_POST['custom_shipping_options_nonce'], 'save_custom_shipping_options' )
+			! isset( $_POST['conditional_shipping_options_nonce'] ) ||
+			! wp_verify_nonce( wp_unslash( sanitize_text_field( $_POST['conditional_shipping_options_nonce'] ) ), 'save_conditional_shipping_options' )
 		) {
+			echo 'error';
 			return; // Security check failed.
 		}
 
@@ -227,7 +228,7 @@ class HS_WCSH_Init {
 			foreach ( $_POST['zone_data'] as $zone_id => $zone_values ) {
 				foreach ( $zone_values as $region_code => $value ) {
 					// Update the value in the database, using a unique key for the zone and region.
-					update_option( 'custom_shipping_option_' . $zone_id . '_' . $region_code, sanitize_text_field( $value ) );
+					update_option( 'conditional_shipping_option_' . $zone_id . '_' . $region_code, sanitize_text_field( $value ) );
 				}
 			}
 		}
@@ -248,7 +249,7 @@ class HS_WCSH_Init {
 	 * Handle Saves the plugin tab data.
 	 */
 	public function handle_save_for_custom_shipping_tab() {
-		if ( isset( $_GET['page'] ) && 'custom-shipping-options-tab' === $_GET['page'] ) {
+		if ( isset( $_GET['page'] ) && 'conditional-shipping-options' === $_GET['page'] ) {
 			$this->save_plugin_woocommerce_tab_data();
 		}
 	}

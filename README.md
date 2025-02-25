@@ -21,6 +21,7 @@ Simplify your online store's shipping choices with the Easy Ship Options plugin 
 * Lets you Hide all shipping options when free shipping is available.
 * Gives you the option to force show other shipping option when above feature is enabled.
 * Compatible with multiple shipping zones.
+* Add a new shipping option that enable you to add shipping cost by state/county.
 
 == Frequently Asked Questions ==
 
@@ -35,6 +36,8 @@ Submit a issue <a href="https://github.com/weboptics/shipping-option-conditions-
 == Screenshots ==
 1. If checked, other shipping would be un-available when this is available.
 2. If checked, this shipping method will show even if Its hidden by free shipping.
+3. Select Conditional Shipping Option from the shipping options.
+4. Add Amounts Here and save, any empty amount will be considered free.
 
 == Installation ==
 
@@ -86,3 +89,4 @@ Submit a issue <a href="https://github.com/weboptics/shipping-option-conditions-
 
 = 1.0.9 =
 * Work on WP Coding standards
+* Added Conditional Shipping by State/County Option

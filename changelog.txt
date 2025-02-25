@@ -39,3 +39,4 @@
 
 = 1.0.9 =
 * Work on WP Coding standards
+* Added Conditional Shipping by State/County Option

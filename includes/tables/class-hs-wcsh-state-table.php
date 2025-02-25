@@ -86,7 +86,7 @@ if ( ! class_exists( 'HS_WCSH_State_Table' ) ) {
 			$i = 0;
 			foreach ( $states as $code => $name ) {
 				// Fetch custom option for each state and store it.
-				$saved_value               = get_option( 'custom_shipping_option_' . $this->zone_id . '_' . $code, '' );
+				$saved_value               = get_option( 'conditional_shipping_option_' . $this->zone_id . '_' . $code, '' );
 				$data[ $i ]['zone_name']   = $code;
 				$data[ $i ]['zone_code']   = $name;
 				$data[ $i ]['zone_amount'] = '<input type="number" value="' . $saved_value . '" name="zone_data[' . $this->zone_id . '][' . $code . ']"> ' . $selected_currency;
