@@ -103,7 +103,7 @@ if ( ! class_exists( 'HS_WCSH_CS' ) ) {
 				$zone_id        = $shipping_zone->get_zone_id();
 				$address        = $package['destination'];
 				$checkout_state = $address['state'];
-				$cost           = get_option( 'custom_shipping_option_' . $zone_id . '_' . $checkout_state, '' );
+				$cost           = get_option( 'conditional_shipping_option_' . $zone_id . '_' . $checkout_state, '' );
 
 				$rate = array(
 					'label'    => $this->title,
