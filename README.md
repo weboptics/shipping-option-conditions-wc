@@ -3,7 +3,7 @@
 Contributors: weboptics, haseebnawaz298
 Tags: woocommerce, free shipping, local pickup, hide, hide shipping methods
 Tested up to: 6.7
-Stable tag: 1.0.8
+Stable tag: 1.1.0
 WC requires at least: 3
 WC tested up to: 5.6.0
 License: GPL v2 or later
@@ -90,3 +90,6 @@ Submit a issue <a href="https://github.com/weboptics/shipping-option-conditions-
 = 1.0.9 =
 * Work on WP Coding standards
 * Added Conditional Shipping by State/County Option
+
+= 1.1.0 =
+* Update Stable Tab

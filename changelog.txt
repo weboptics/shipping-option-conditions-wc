@@ -40,3 +40,6 @@
 = 1.0.9 =
 * Work on WP Coding standards
 * Added Conditional Shipping by State/County Option
+
+= 1.1.0 =
+* Update Stable Tab
