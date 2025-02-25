@@ -1,0 +1,41 @@
+== Shipping Option Conditions for WooCommerce Changelog ==
+
+= 1.0.0 =
+* Release first version
+
+= 1.0.1 =
+* Update plugin description.
+* Added Frequently Asked Questions.
+* Added Screenshots.
+* Added Changelog.
+* Added Banner and Icon.
+* Added Plugin URI.
+
+= 1.0.2 =
+* Update tested up to version from 6.3 to 6.4.2
+
+= 1.0.3 =
+* Updated the code into a Class
+* Added notice that WooCommerce is Required.
+
+= 1.0.4 =
+* Updated Screenshots
+* Update Options Labels
+* Update Tested upto
+* Added notice that WooCommerce is Required.
+
+= 1.0.5 =
+* Updated Version
+
+= 1.0.6 =
+* Updated Tags
+*
+= 1.0.7 =
+* Updated tested upto
+
+= 1.0.8 =
+* Updated author and contributors
+* Updated tested upto
+
+= 1.0.9 =
+* Work on WP Coding standards

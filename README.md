@@ -6,7 +6,7 @@ Tested up to: 6.7
 Stable tag: 1.0.8
 WC requires at least: 3
 WC tested up to: 5.6.0
-License: GPLv3 or later License
+License: GPL v2 or later
 URI: http://www.gnu.org/licenses/gpl-3.0.html
 
 This plugin automatically hides all other shipping methods when “free shipping” is available. 
@@ -85,3 +85,4 @@ Submit a issue <a href="https://github.com/weboptics/shipping-option-conditions-
 * Updated tested upto
 
 = 1.0.9 =
+* Work on WP Coding standards
