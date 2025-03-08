@@ -43,3 +43,7 @@
 
 = 1.1.0 =
 * Update Stable Tab
+
+= 1.2.0 =
+* Security Updates
+* Minor code cleanup and fixes
