@@ -2,7 +2,7 @@
 /**
  * Main init class.
  *
- * @package 1.0.9
+ * @package 1.2.0
  */
 
 /**
@@ -45,7 +45,7 @@ class HS_WCSH_Init {
 			$woo_show_hide_override = ( isset( $shipping_data['woo_show_hide_override'] ) ) ? $shipping_data['woo_show_hide_override'] : 'no';
 			if ( 'free_shipping' === $rate->method_id && 'yes' === $woo_show_hide ) {
 				$new_rates[ $rate_id ] = $rate;
-			} elseif ( 'yes' == $woo_show_hide_override ) {
+			} elseif ( 'yes' === $woo_show_hide_override ) {
 				$new_rates[ $rate_id ] = $rate;
 			}
 		}
@@ -171,10 +171,14 @@ class HS_WCSH_Init {
 	 */
 	public function plugin_woocommerce_tab_output() {
 
-			$data_store        = WC_Data_Store::load( 'shipping-zone' );
-			$all_zones         = $data_store->get_zones();
-			$current_tab       = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'zone-' . $all_zones[0]->zone_id; // Default tab.
-			$selected_currency = get_woocommerce_currency();
+		$data_store    = WC_Data_Store::load( 'shipping-zone' );
+		$all_zones     = $data_store->get_zones();
+		$first_zone_id = 0;
+		if ( isset( $all_zones[0]->zone_id ) ) {
+			$first_zone_id = $all_zones[0]->zone_id;
+		}
+		$current_tab       = isset( $_GET['tab'] ) ? sanitize_text_field( wp_unslash( $_GET['tab'] ) ) : 'zone-' . $first_zone_id; //  phpcs:ignore WordPress.Security.NonceVerification.Recommended
+		$selected_currency = get_woocommerce_currency();
 
 		?>
 		<div class="wrap">
@@ -183,23 +187,30 @@ class HS_WCSH_Init {
 			<p><strong><?php esc_html_e( 'Any Empty field will be considered free', 'shipping-option-conditions-wc' ); ?></strong></p>
 			<!-- Add your custom content or forms here -->
 			<h2 class="nav-tab-wrapper">
-				<?php foreach ( $all_zones as $zone ) { ?>
-					<a href="?page=custom-shipping-options-tab&tab=zone-<?php echo esc_html( $zone->zone_id ); ?>" class="nav-tab <?php echo 'zone-' . $zone->zone_id === $current_tab ? 'nav-tab-active' : ''; ?>">
-						<?php echo esc_html( $zone->zone_name ); ?>
-					</a>
-				<?php } ?>
+				<?php
+				if ( $all_zones ) {
+					foreach ( $all_zones as $zone ) {
+						?>
+						<a href="?page=custom-shipping-options-tab&tab=zone-<?php echo esc_html( $zone->zone_id ); ?>" class="nav-tab <?php echo 'zone-' . $zone->zone_id === $current_tab ? 'nav-tab-active' : ''; ?>">
+							<?php echo esc_html( $zone->zone_name ); ?>
+						</a>
+						<?php
+					}
+				}
+				?>
 			</h2>
 			<form method="post" action="">
 				<?php wp_nonce_field( 'save_conditional_shipping_options', 'conditional_shipping_options_nonce' ); ?>
 
 				<div class="tab-content">
 					<?php
-					foreach ( $all_zones as $zone ) {
-						if ( 'zone-' . $zone->zone_id === $current_tab ) {
-
-							$table = new HS_WCSH_State_Table( $zone->zone_id );
-							$table->prepare_items();
-							$table->display();
+					if ( $all_zones ) {
+						foreach ( $all_zones as $zone ) {
+							if ( 'zone-' . $zone->zone_id === $current_tab ) {
+								$table = new HS_WCSH_State_Table( $zone->zone_id );
+								$table->prepare_items();
+								$table->display();
+							}
 						}
 					}
 					?>
@@ -218,14 +229,16 @@ class HS_WCSH_Init {
 	public function save_plugin_woocommerce_tab_data() {
 		if (
 			! isset( $_POST['conditional_shipping_options_nonce'] ) ||
-			! wp_verify_nonce( wp_unslash( sanitize_text_field( $_POST['conditional_shipping_options_nonce'] ) ), 'save_conditional_shipping_options' )
+			! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['conditional_shipping_options_nonce'] ) ), 'save_conditional_shipping_options' )
 		) {
 			echo 'error';
 			return; // Security check failed.
 		}
 
 		if ( isset( $_POST['zone_data'] ) && is_array( $_POST['zone_data'] ) ) {
-			foreach ( $_POST['zone_data'] as $zone_id => $zone_values ) {
+			$zone_data = array_map( 'sanitize_text_field', wp_unslash( $_POST['zone_data'] ) ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+
+			foreach ( $zone_data as $zone_id => $zone_values ) {
 				foreach ( $zone_values as $region_code => $value ) {
 					// Update the value in the database, using a unique key for the zone and region.
 					update_option( 'conditional_shipping_option_' . $zone_id . '_' . $region_code, sanitize_text_field( $value ) );
@@ -249,9 +262,27 @@ class HS_WCSH_Init {
 	 * Handle Saves the plugin tab data.
 	 */
 	public function handle_save_for_custom_shipping_tab() {
-		if ( isset( $_GET['page'] ) && 'conditional-shipping-options' === $_GET['page'] ) {
+		if ( isset( $_GET['page'] ) && 'conditional-shipping-options' === $_GET['page'] ) { //  phpcs:ignore WordPress.Security.NonceVerification.Recommended
 			$this->save_plugin_woocommerce_tab_data();
 		}
+	}
+	/**
+	 * Recursive sanitation for an array
+	 *
+	 * @param array $array array data.
+	 *
+	 * @return mixed
+	 */
+	public function recursive_sanitize_text_field( $array ) {
+		foreach ( $array as $key => &$value ) {
+			if ( is_array( $value ) || is_object( $value ) ) {
+				$value = recursive_sanitize_text_field( $value );
+			} else {
+				$value = sanitize_text_field( $value );
+			}
+		}
+
+		return $array;
 	}
 
 

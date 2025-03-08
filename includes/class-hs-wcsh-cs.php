@@ -2,7 +2,7 @@
 /**
  * Condition Shipping class
  *
- * @package 1.0.9
+ * @package 1.2.0
  */
 
 if ( ! class_exists( 'HS_WCSH_CS' ) ) {
@@ -10,7 +10,7 @@ if ( ! class_exists( 'HS_WCSH_CS' ) ) {
 	/**
 	 * Condition Shipping class
 	 *
-	 * @package 1.0.9
+	 * @package 1.2.0
 	 */
 	class HS_WCSH_CS extends WC_Shipping_Method {
 		/**
@@ -24,11 +24,11 @@ if ( ! class_exists( 'HS_WCSH_CS' ) ) {
 		public function __construct( $instance_id = 0 ) {
 			$this->id           = 'conditional_shipping_class';
 			$this->instance_id  = absint( $instance_id );
-			$this->method_title = __( 'Conditional Shipping' );
+			$this->method_title = __( 'Conditional Shipping', 'shipping-option-conditions-wc' );
 
 			$this->enabled            = 'yes';
 			$this->title              = 'Conditional Shipping';
-			$this->method_description = __( 'Shipping Options Based of Custom Conditions' );
+			$this->method_description = __( 'Shipping Options Based of Custom Conditions', 'shipping-option-conditions-wc' );
 			$this->supports           = array(
 				// 'settings',
 				'shipping-zones',

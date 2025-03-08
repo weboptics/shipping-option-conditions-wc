@@ -2,7 +2,7 @@
 /**
  * Custom Shipping Table File
  *
- * @package 1.0.9
+ * @package 1.2.0
  */
 
 if ( ! class_exists( 'HS_WCSH_State_Table' ) ) {
@@ -10,7 +10,7 @@ if ( ! class_exists( 'HS_WCSH_State_Table' ) ) {
 	/**
 	 * Custom Shipping Table class
 	 *
-	 * @package 1.0.9
+	 * @package 1.2.0
 	 */
 	class HS_WCSH_State_Table extends WP_List_Table {
 		/**
