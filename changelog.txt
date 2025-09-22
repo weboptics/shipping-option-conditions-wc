@@ -47,3 +47,6 @@
 = 1.2.0 =
 * Security Updates
 * Minor code cleanup and fixes
+
+= 1.2.1=
+* Move Options inside WooCommerce shipping tab

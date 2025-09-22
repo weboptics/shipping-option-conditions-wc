@@ -2,8 +2,8 @@
 
 Contributors: weboptics, haseebnawaz298
 Tags: woocommerce, free shipping, local pickup, hide, hide shipping methods
-Tested up to: 6.7
-Stable tag: 1.2.0
+Tested up to: 6.8
+Stable tag: 1.2.1
 WC requires at least: 3
 WC tested up to: 5.6.0
 License: GPL v2 or later
@@ -97,3 +97,6 @@ Submit a issue <a href="https://github.com/weboptics/shipping-option-conditions-
 = 1.2.0 =
 * Security Updates
 * Minor code cleanup and fixes 
+
+= 1.2.1=
+* Move Options inside WooCommerce shipping tab

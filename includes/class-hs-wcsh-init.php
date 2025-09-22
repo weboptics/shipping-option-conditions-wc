@@ -2,7 +2,7 @@
 /**
  * Main init class.
  *
- * @package 1.2.0
+ * @package 1.2.1
  */
 
 /**

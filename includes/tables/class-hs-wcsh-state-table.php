@@ -2,7 +2,7 @@
 /**
  * Custom Shipping Table File
  *
- * @package 1.2.0
+ * @package 1.2.1
  */
 // This must be here to be available for the class to extend it.
 // It is critical to load these files before the class definition.
