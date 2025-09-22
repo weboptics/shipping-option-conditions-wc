@@ -39,7 +39,7 @@ if ( ! defined( 'HS_WCSH_PLUGIN_DIR' ) ) {
 
 // Only load the main initialization class here.
 if ( ! class_exists( 'HS_WCSH_Init' ) ) {
-    require_once plugin_dir_path( __FILE__ ) . 'includes/class-hs-wcsh-init.php';
+    require_once HS_WCSH_PLUGIN_DIR . 'includes/class-hs-wcsh-init.php';
 }
 
 // Instantiate the main class on the 'plugins_loaded' hook.

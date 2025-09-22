@@ -26,7 +26,6 @@ class HS_WCSH_Init {
 
 		add_filter( 'woocommerce_shipping_init', array( $this, 'shipping_methods' ) );
 		add_filter( 'woocommerce_shipping_methods', array( $this, 'add_shipping_method' ) );
-		// add_action( 'admin_menu', array( $this, 'plugin_woocommerce_tab' ) );
 		add_action( 'woocommerce_settings_save_shipping', array( $this, 'handle_save_for_custom_shipping_tab' ) );
 
 		add_filter( 'woocommerce_get_sections_shipping',  array( $this,'add_shipping_section' ) );
@@ -264,7 +263,25 @@ class HS_WCSH_Init {
 	 */
 	public function handle_save_for_custom_shipping_tab() {
 		if ( isset( $_GET['section'] ) && 'conditional_shipping' === $_GET['section'] ) { //  phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+			 // This ensures the function is available during a POST request.
+			if ( ! function_exists( 'convert_to_screen' ) ) {
+				require_once( ABSPATH . 'wp-admin/includes/screen.php' );
+			}
+
+			// Also ensure the parent class file is loaded before your table class.
+			if ( ! class_exists( 'WP_List_Table' ) ) {
+				require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
+			}
+
+			// Now, you can safely load and call your class.
+            require_once HS_WCSH_PLUGIN_DIR . '/includes/tables/class-hs-wcsh-state-table.php';
+
 			$this->save_plugin_woocommerce_tab_data();
+			$redirect_url = admin_url( 'admin.php?page=wc-settings&tab=shipping&section=conditional_shipping&saved=1' );
+            wp_safe_redirect( $redirect_url );
+            exit; // Must exit after redirect to prevent further code execution.
+
 		}
 	}
 	/**
