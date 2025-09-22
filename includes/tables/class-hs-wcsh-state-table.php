@@ -4,9 +4,17 @@
  *
  * @package 1.2.0
  */
+// This must be here to be available for the class to extend it.
+// It is critical to load these files before the class definition.
+if ( ! class_exists( 'WP_List_Table' ) ) {
+    require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
+}
 
+// Fix: Make sure the function is available before the class definition.
+if ( ! function_exists( 'convert_to_screen' ) ) {
+    require_once( ABSPATH . 'wp-admin/includes/screen.php' );
+}
 if ( ! class_exists( 'HS_WCSH_State_Table' ) ) {
-	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 	/**
 	 * Custom Shipping Table class
 	 *
