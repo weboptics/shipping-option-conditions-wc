@@ -78,17 +78,6 @@ This is the milestone that justifies a WooCommerce Marketplace submission.
 
 ---
 
-## WooCommerce Marketplace Resubmission
-
-Target: after v2.0 ships. By then the plugin will have:
-
-- A meaningful free version with WordPress.org installs and reviews
-- A clear free vs pro feature split
-- Multiple condition types with a visual rule builder
-- A commercial pro version demonstrating sustainability
-
----
-
 ## Suggested Priority Order
 
-v1.2.2 → v1.2.3 → v1.2.4 → v1.2.5 → v1.3 → v1.4 → v2.0 (free core) → launch Pro → v2.1 → resubmit
+v1.2.2 → v1.2.3 → v1.2.4 → v1.2.5 → v1.3 → v1.4 → v2.0 (free core) → v2.1 → v2.2
