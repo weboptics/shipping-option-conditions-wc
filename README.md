@@ -3,13 +3,13 @@
 Contributors: weboptics, haseebnawaz298
 Tags: woocommerce, free shipping, local pickup, hide, hide shipping methods
 Tested up to: 7.0
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 WC requires at least: 3
 WC tested up to: 5.6.0
 License: GPL v2 or later
 URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-This plugin automatically hides all other shipping methods when “free shipping” is available. 
+Conditionally show or hide WooCommerce shipping methods based on free shipping availability and cart total.
 
 
 == Description ==
@@ -18,10 +18,13 @@ Simplify your online store's shipping choices with the Easy Ship Options plugin 
 
 = Features =
 
-* Lets you Hide all shipping options when free shipping is available.
-* Gives you the option to force show other shipping option when above feature is enabled.
+* Hide all shipping options when free shipping is available.
+* Force-show individual methods even when hidden by free shipping (override).
+* Set a minimum cart total per shipping method — method only appears when cart reaches the threshold.
+* Set a maximum cart total per shipping method — method disappears once the cart exceeds the limit.
+* Combine min and max to create a cart total range for any method.
 * Compatible with multiple shipping zones.
-* Add a new shipping option that enable you to add shipping cost by state/county.
+* Add a custom shipping option with per-state/county pricing.
 
 == Frequently Asked Questions ==
 
@@ -98,5 +101,8 @@ Submit a issue <a href="https://github.com/weboptics/shipping-option-conditions-
 * Security Updates
 * Minor code cleanup and fixes 
 
-= 1.2.1=
+= 1.2.1 =
 * Move Options inside WooCommerce shipping tab
+
+= 1.2.2 =
+* Added Cart Total Condition — set a minimum and/or maximum cart subtotal per shipping method. Methods outside the defined range are automatically hidden at checkout.

@@ -2,7 +2,7 @@
 /**
  * Main init class.
  *
- * @package 1.2.1
+ * @package 1.2.2
  */
 
 /**
@@ -18,6 +18,7 @@ class HS_WCSH_Init {
 		if ( in_array( 'woocommerce/woocommerce.php', apply_filters( 'active_plugins', get_option( 'active_plugins' ) ) ) ) {
 			// @codingStandardsIgnoreEnd
 			add_filter( 'woocommerce_package_rates', array( $this, 'hide_shipping_when_free_is_available' ), 100 );
+			add_filter( 'woocommerce_package_rates', array( $this, 'hide_shipping_by_cart_total' ), 101 );
 			add_action( 'woocommerce_init', array( $this, 'shipping_instance_form_fields_filters' ) );
 		}
 		add_action( 'admin_notices', array( $this, 'custom_plugin_activation_notice' ) );
@@ -169,6 +170,62 @@ class HS_WCSH_Init {
 		return $settings;
 	}
 	/**
+	 * Cart total min/max fields added to every shipping method instance.
+	 *
+	 * @param array $settings woo field settings.
+	 * @return array
+	 */
+	public function shipping_instance_form_add_cart_total_fields( $settings ) {
+		$settings['woo_cart_min_total'] = array(
+			'title'       => __( 'Min Cart Total', 'shipping-option-conditions-wc' ),
+			'type'        => 'price',
+			'description' => __( 'Only show this method when the cart subtotal is at least this amount. Leave blank for no minimum.', 'shipping-option-conditions-wc' ),
+			'desc_tip'    => true,
+			'default'     => '',
+			'placeholder' => __( 'No minimum', 'shipping-option-conditions-wc' ),
+		);
+		$settings['woo_cart_max_total'] = array(
+			'title'       => __( 'Max Cart Total', 'shipping-option-conditions-wc' ),
+			'type'        => 'price',
+			'description' => __( 'Only show this method when the cart subtotal is at most this amount. Leave blank for no maximum.', 'shipping-option-conditions-wc' ),
+			'desc_tip'    => true,
+			'default'     => '',
+			'placeholder' => __( 'No maximum', 'shipping-option-conditions-wc' ),
+		);
+		return $settings;
+	}
+
+	/**
+	 * Hide shipping methods that don't meet their cart total condition.
+	 *
+	 * @param array $rates Array of rates found for the package.
+	 * @return array
+	 */
+	public function hide_shipping_by_cart_total( $rates ) {
+		if ( ! WC()->cart ) {
+			return $rates;
+		}
+
+		$cart_total = WC()->cart->get_subtotal();
+
+		foreach ( $rates as $rate_id => $rate ) {
+			$settings = get_option( 'woocommerce_' . $rate->method_id . '_' . $rate->instance_id . '_settings' );
+			$min      = isset( $settings['woo_cart_min_total'] ) ? $settings['woo_cart_min_total'] : '';
+			$max      = isset( $settings['woo_cart_max_total'] ) ? $settings['woo_cart_max_total'] : '';
+
+			if ( '' !== $min && $cart_total < floatval( $min ) ) {
+				unset( $rates[ $rate_id ] );
+				continue;
+			}
+			if ( '' !== $max && $cart_total > floatval( $max ) ) {
+				unset( $rates[ $rate_id ] );
+			}
+		}
+
+		return $rates;
+	}
+
+	/**
 	 * Add settings in shipping zone.
 	 */
 	public function shipping_instance_form_fields_filters() {
@@ -182,6 +239,7 @@ class HS_WCSH_Init {
 			} else {
 				add_filter( 'woocommerce_shipping_instance_form_fields_' . $shipping_method->id, array( $this, 'shipping_instance_form_add_extra_fields_others' ) );
 			}
+			add_filter( 'woocommerce_shipping_instance_form_fields_' . $shipping_method->id, array( $this, 'shipping_instance_form_add_cart_total_fields' ) );
 		}
 	}
 
