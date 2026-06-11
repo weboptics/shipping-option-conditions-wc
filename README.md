@@ -2,7 +2,7 @@
 
 Contributors: weboptics, haseebnawaz298
 Tags: woocommerce, free shipping, local pickup, hide, hide shipping methods
-Tested up to: 6.8
+Tested up to: 7.0
 Stable tag: 1.2.1
 WC requires at least: 3
 WC tested up to: 5.6.0

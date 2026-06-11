@@ -19,4 +19,4 @@ package.json
 package-lock.json
 composer.json
 composer.lock
-REFERENCE.md
+CLAUDE.md
